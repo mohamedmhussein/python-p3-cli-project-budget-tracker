@@ -12,7 +12,7 @@ class Expense(Base):
     description = Column(String())
     category_id = Column(Integer(), ForeignKey('categories.id'))
     time = Column(DateTime, default = datetime.now())
-    category = relationship("Category", back_populates="expenses")
+    category = relationship("Category", back_populates="expense")
     
     def __repr__(self):
         return f"Amount: {amount}, description: {description}, category id: {category_id}"
