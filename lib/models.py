@@ -23,4 +23,4 @@ class Category(Base):
     name = Column(String())
     expense = relationship("Expense", back_populates="category")
     
-Base.metadata.create_all(engine)
+Base.metadata.create_all(bind = engine)
