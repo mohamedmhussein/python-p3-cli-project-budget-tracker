@@ -1,4 +1,5 @@
-from functions import create_category, create_expense, display_expenses
+from functions import create_category, create_expense, display_expenses, delete_all_records
+from models import Expense, Category
 
 if __name__ == "__main__":
 
@@ -11,4 +12,4 @@ if __name__ == "__main__":
     # description = input("Enter the expense description ")
     # create_expense(amount, description, category_id, date)
 
-    display_expenses()
+    delete_all_records(Expense)
