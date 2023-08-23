@@ -17,7 +17,7 @@ class Expense(Base):
     
     # def __init__(self, amount, description,ca)
     def __repr__(self):
-        return f"Amount: {self.amount}, description: {self.description}, category id: {self.category_id}"
+        return f"{self.id}) Amount: {self.amount}, description: {self.description}, category id: {self.category_id}"
 
 class Category(Base):
     __tablename__ = 'categories'
