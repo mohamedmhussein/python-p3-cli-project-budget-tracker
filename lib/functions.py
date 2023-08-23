@@ -22,6 +22,6 @@ def display_expenses():
     session = Session()
     all_expenses = session.query(Expense).all()
     for expense in all_expenses:
-        print(expense.amount)
+        print(expense)
 
 
