@@ -1,9 +1,11 @@
-from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy import Column, String, Integer, Float, DateTime, create_engine, ForeignKey
 from datetime import datetime
 
 Base = declarative_base()
 engine = create_engine("sqlite:///budget_tracker.db")
+
+Session = sessionmaker(bind=engine)
 
 class Expense(Base):
     __tablename__ = 'expenses'

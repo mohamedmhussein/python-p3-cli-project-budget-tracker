@@ -1,8 +1,5 @@
-from sqlalchemy.orm import sessionmaker
-from models import engine, Category
-from functions import create_category
-
-Session = sessionmaker(bind=engine)
+from sqlalchemy.orm import 
+from models import engine, Category, Session
 
 common_categories = [
     "Housing",

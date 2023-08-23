@@ -1,8 +1,5 @@
 from sqlalchemy.orm import sessionmaker
-from models import engine
-from models import Expense, Category
-
-Session = sessionmaker(bind=engine)
+from models import engine, Session, Expense, Category
 
 def create_expense():
     category_id = input("Enter the expense category id")
