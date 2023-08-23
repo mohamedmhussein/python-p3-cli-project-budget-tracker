@@ -1,6 +1,5 @@
 from sqlalchemy.orm import sessionmaker
 from models import engine, Session, Expense, Category
-from datetime import datetime
 
 def create_expense(amount,description,category_id, date):
     session = Session()

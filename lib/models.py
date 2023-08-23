@@ -1,6 +1,5 @@
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy import Column, String, Integer, Float, DateTime, create_engine, ForeignKey
-from datetime import datetime
 
 Base = declarative_base()
 engine = create_engine("sqlite:///budget_tracker.db")
@@ -13,8 +12,6 @@ class Expense(Base):
     amount = Column(Float(), nullable = False)
     description = Column(String())
     category_id = Column(Integer(), ForeignKey('categories.id'))
-    # time = datetime.now()
-    # time = Column(DateTime, default = datetime.now())
     date = Column(String())
     category = relationship("Category", back_populates="expense")
     
