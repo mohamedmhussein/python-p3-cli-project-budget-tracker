@@ -1,11 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from models import engine, Session, Expense, Category
 
-def create_expense():
-    category_id = input("Enter the expense category id")
-    amount = input("Enter the expense amount")
-    description = input("Enter the expense description")
-
+def create_expense(amount,description,category_id):
     session = Session()
     new_expense = Expense(amount = amount, category_id = category_id, description = description)
     session.add(new_expense)
@@ -27,3 +23,5 @@ def display_expenses():
     all_expenses = session.query(Expense).all()
     for expense in all_expenses:
         print(expense.amount)
+
+

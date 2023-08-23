@@ -5,4 +5,7 @@ if __name__ == "__main__":
     # name = input("Enter the category name: ")
     # create_category(name)
 
-    display_expenses()
+    category_id = input("Enter the expense category id")
+    amount = input("Enter the expense amount")
+    description = input("Enter the expense description")
+    create_expense(amount, description, category_id)
