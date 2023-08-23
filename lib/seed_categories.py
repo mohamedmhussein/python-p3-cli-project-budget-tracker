@@ -1,6 +1,6 @@
 from sqlalchemy.orm import sessionmaker
-from models import engine
-from models import Category
+from models import engine, Category
+from functions import create_category
 
 Session = sessionmaker(bind=engine)
 
