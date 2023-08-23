@@ -1,9 +1,10 @@
 from sqlalchemy.orm import sessionmaker
 from models import engine, Session, Expense, Category
+from datetime import datetime
 
-def create_expense(amount,description,category_id):
+def create_expense(amount,description,category_id, date):
     session = Session()
-    new_expense = Expense(amount = amount, category_id = category_id, description = description)
+    new_expense = Expense(amount = amount, category_id = category_id, description = description, date = date)
     session.add(new_expense)
     session.commit()
 
