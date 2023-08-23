@@ -14,6 +14,7 @@ class Expense(Base):
     time = Column(DateTime, default = datetime.now())
     category = relationship("Category", back_populates="expense")
     
+    # def __init__(self, amount, description,ca)
     def __repr__(self):
         return f"Amount: {amount}, description: {description}, category id: {category_id}"
 
