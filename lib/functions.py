@@ -14,8 +14,7 @@ def create_expense():
     session.add(new_expense)
     session.commit()
 
-def create_category():
-    name = input("Enter the category name: ")
+def create_category(name):
     session = Session()
     new_category = Category(name = name)
     session.add(new_category)

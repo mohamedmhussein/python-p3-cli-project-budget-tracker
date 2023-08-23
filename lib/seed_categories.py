@@ -4,7 +4,7 @@ from models import Category
 
 Session = sessionmaker(bind=engine)
 
-expense_categories = [
+common_categories = [
     "Housing",
     "Transportation",
     "Food",
@@ -21,6 +21,9 @@ expense_categories = [
     "Childcare",
     "Miscellaneous"
 ]
+
+for category in common_categories:
+    create_category(category)
 
 
 
