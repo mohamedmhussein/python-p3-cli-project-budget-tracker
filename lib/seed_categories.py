@@ -1,5 +1,10 @@
-from sqlalchemy.orm import 
 from models import engine, Category, Session
+from functions import create_category
+
+#Delete all existing category records
+session = Session()
+session.query(Category).delete()
+session.commit()
 
 common_categories = [
     "Housing",
