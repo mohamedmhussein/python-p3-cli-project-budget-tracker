@@ -13,7 +13,8 @@ class Expense(Base):
     amount = Column(Float(), nullable = False)
     description = Column(String())
     category_id = Column(Integer(), ForeignKey('categories.id'))
-    time = Column(DateTime, default = datetime.now())
+    time = datetime.now()
+    #time = Column(DateTime, default = datetime.now())
     category = relationship("Category", back_populates="expense")
     
     # def __init__(self, amount, description,ca)

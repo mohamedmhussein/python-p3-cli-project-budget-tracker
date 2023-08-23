@@ -16,7 +16,14 @@ def create_category(name):
     new_category = Category(name = name)
     session.add(new_category)
     session.commit()
+
 def delete_all_records(table):
     session = Session()
     session.query(table).delete()
     session.commit()
+
+def display_expenses():
+    session = Session()
+    all_expenses = session.query(Expense).all()
+    for expense in all_expenses:
+        print(expense.amount)

@@ -4,7 +4,7 @@ from functions import create_category, delete_all_records
 #Delete all existing category records
 delete_all_records(Category)
 
-
+#Adds common categories
 common_categories = [
     "Housing",
     "Transportation",
