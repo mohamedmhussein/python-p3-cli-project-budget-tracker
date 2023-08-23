@@ -16,3 +16,7 @@ def create_category(name):
     new_category = Category(name = name)
     session.add(new_category)
     session.commit()
+def delete_all_records(table):
+    session = Session()
+    session.query(table).delete()
+    session.commit()
