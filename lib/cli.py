@@ -1,4 +1,4 @@
-from functions import create_category, create_expense, display_expenses, delete_all_records
+from functions import create_category, create_expense, display_data, delete_all_records
 from models import Expense, Category
 
 if __name__ == "__main__":
@@ -13,14 +13,16 @@ if __name__ == "__main__":
     print("Choose one of the following options (enter the number chosen):\n \n")
 
     print("1) Show all expenses")
-    print("2) show categories")
+    print("2) Show categories")
     print("3) Add an expense")
     print("4) Add a new category")
     user_choice = int(input("> "))
 
-    if user_choice is 1:
-        display_expenses()
-    # elif user_choice is 2:
+    if user_choice == 1:
+        display_data(Expense)
+    elif user_choice is 2:
+        display_data(Category)
+
 
 
 

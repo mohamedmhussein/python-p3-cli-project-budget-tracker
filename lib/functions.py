@@ -1,6 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from models import engine, Session, Expense, Category
 
+
 def create_expense(amount,description,category_id, date):
     session = Session()
     new_expense = Expense(amount = amount, category_id = category_id, description = description, date = date)
@@ -18,10 +19,11 @@ def delete_all_records(table):
     session.query(table).delete()
     session.commit()
 
-def display_expenses():
+def display_data(table):
+    print("\n")
     session = Session()
-    all_expenses = session.query(Expense).all()
-    for expense in all_expenses:
-        print(expense)
+    all_data = session.query(table).all()
+    for row in all_data:
+        print(row)
 
 
