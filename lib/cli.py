@@ -3,6 +3,28 @@ from models import Expense, Category
 
 if __name__ == "__main__":
 
+    print("******BUDGET TRACKER******")
+    print("-----------------------------------")
+    print("Welcome to the Budget Tracker CLI!")
+    print("-----------------------------------")
+    print("Manage your finances and track your expenses easily.")
+    print("-----------------------------------")
+
+    print("Choose one of the following options (enter the number chosen):\n \n")
+
+    print("1) Show all expenses")
+    print("2) show categories")
+    print("3) Add an expense")
+    print("4) Add a new category")
+    user_choice = int(input("> "))
+
+    if user_choice is 1:
+        display_expenses()
+    # elif user_choice is 2:
+
+
+
+
     # name = input("Enter the category name: ")
     # create_category(name)
 
@@ -11,5 +33,3 @@ if __name__ == "__main__":
     # amount = input("Enter the expense amount ")
     # description = input("Enter the expense description ")
     # create_expense(amount, description, category_id, date)
-
-    display_expenses()
