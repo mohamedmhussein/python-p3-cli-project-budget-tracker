@@ -12,4 +12,4 @@ if __name__ == "__main__":
     # description = input("Enter the expense description ")
     # create_expense(amount, description, category_id, date)
 
-    delete_all_records(Expense)
+    display_expenses()
