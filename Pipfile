@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 ipdb = "*"
 sqlalchemy = "*"
-datetime = "*"
 faker = "*"
+datetime = "*"
 
 [dev-packages]
 
