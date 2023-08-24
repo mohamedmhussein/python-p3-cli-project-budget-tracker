@@ -24,5 +24,8 @@ class Category(Base):
     id = Column(Integer(), primary_key = True)
     name = Column(String())
     expense = relationship("Expense", back_populates="category")
+
+    def __repr__(self):
+        return f"{self.id}) {self.name}"
     
 Base.metadata.create_all(bind = engine)
