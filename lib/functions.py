@@ -1,6 +1,7 @@
 from sqlalchemy.orm import sessionmaker
 from models import engine, Session, Expense, Category
-
+import subprocess
+import sys
 
 def create_expense(amount,description,category_id, date):
     session = Session()
@@ -25,5 +26,10 @@ def display_data(table):
     all_data = session.query(table).all()
     for row in all_data:
         print(row)
+
+def restart_script(script_file):
+    python = sys.executable  
+    script = script_file  
+    subprocess.call([python, script])
 
 
