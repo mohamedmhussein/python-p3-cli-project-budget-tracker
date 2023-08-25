@@ -6,6 +6,8 @@ import sys
 import os
 from rich.console import Console
 from rich.table import Table
+from rich.text import Text
+import random
 
 def create_expense(amount,description,category_id, date):
     session = Session()
@@ -24,20 +26,20 @@ def delete_all_records(table):
     session.query(table).delete()
     session.commit()
 
-def display_data(db):
+def display_data(model_cls):
     print("\n")
-    table = Table(title = "All Expenses")
-    columns = {"ID": "cyan", "Amount": "magenta", "Description": "bright_yellow", "Category ID": "white", "Date": "bright_green"}
-    i = 0
-    for column in columns:
-        table.add_column(list(columns.keys())[i], style = columns[column])
-        i += 1
     session = Session()
-    all_data = session.query(db).all()
-    for expense in all_data:
-        table.add_row(str(expense.id), str(expense.amount), expense.description, str(expense.category_id), expense.date)
-        # print(expense)
     console = Console()
+    colors = ["cyan", "magenta", "bright_yellow", "white", "bright_green"]
+    all_data = session.query(model_cls).all()
+    table_title = Text(f"All {model_cls.__name__}s Data")
+    table_title.stylize("bold bright_yellow")
+    console.print(table_title)
+    table = Table(show_header=True, header_style="bold")
+    for column in model_cls.__table__.columns:
+        table.add_column(column.name, style=random.choice(colors), header_style="bold")
+    for data in all_data:
+        table.add_row(*[str(getattr(data, column.name)) for column in model_cls.__table__.columns])
     console.print(table)
 
 def sort_by_amount(mode):
