@@ -1,5 +1,6 @@
-from functions import create_category, create_expense, display_data, delete_all_records, sort_by_amount, sum_expenses
-from models import Expense, Category
+from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses
+from models import Expense, Category, Session
+from sqlalchemy import desc
 import subprocess
 import sys
 import os
@@ -36,10 +37,14 @@ if __name__ == "__main__":
     print(options[user_choice])
 
     if user_choice == 0:
-        display_data(Expense)
+        session = Sessoin()
+        all_data = session.query(Expense).all()
+        display_data(Expense, all_data)
         # restart_script()
     elif user_choice == 1:
-        display_data(Category)
+        session = Sessoin()
+        all_data = session.query(Category).all()
+        display_data(Category, all_data)
         # restart_script()
     elif user_choice == 2:
         date = input("Enter the expense date (YYYY-MM-DD) ")
@@ -54,10 +59,15 @@ if __name__ == "__main__":
         # restart_script()
     elif user_choice == 4:
         sort_choice = int(input("1) Ascending\n2) Descending \n>>"))
+        session = Session()
         if sort_choice == 1:
-            sort_by_amount("ascending")
+            sorted_data = session.query(Expense).order_by(Expense.amount).all()
+            display_data(Expense, sorted_data)
+            # sort_by_amount("ascending")
         elif sort_choice == 2:
-            sort_by_amount("descending")
+            sorted_data = session.query(Expense).order_by(desc(Expense.amount)).all()
+            display_data(Expense, sorted_data)            
+            # sort_by_amount("descending")
         # restart_script()
     elif user_choice == 5:
         sum_expenses()

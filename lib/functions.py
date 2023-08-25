@@ -26,12 +26,13 @@ def delete_all_records(table):
     session.query(table).delete()
     session.commit()
 
-def display_data(model_cls):
+def display_data(model_cls, all_data):
     print("\n")
-    session = Session()
+    # session = Session()
+    # all_data = session.query(model_cls).all()
+
     console = Console()
     colors = ["cyan", "magenta", "bright_yellow", "white", "bright_green"]
-    all_data = session.query(model_cls).all()
     table_title = Text(f"All {model_cls.__name__}s Data")
     table_title.stylize("bold bright_yellow")
     console.print(table_title)
@@ -42,14 +43,15 @@ def display_data(model_cls):
         table.add_row(*[str(getattr(data, column.name)) for column in model_cls.__table__.columns])
     console.print(table)
 
-def sort_by_amount(mode):
-    session = Session()
-    if mode == "ascending":
-        sorted_data = session.query(Expense).order_by(Expense.amount).all()
-    elif mode == "descending":
-        sorted_data = session.query(Expense).order_by(desc(Expense.amount)).all()
-    for row in sorted_data:
-        print(row)
+# def sort_by_amount(mode):
+#     session = Session()
+#     if mode == "ascending":
+#         sorted_data = session.query(Expense).order_by(Expense.amount).all()
+#         display_data(Expense, sorted_data)
+#     elif mode == "descending":
+#         sorted_data = session.query(Expense).order_by(desc(Expense.amount)).all()
+#     for row in sorted_data:
+#         print(row)
 def sum_expenses():
     session = Session()
     expenses_sum = session.query(func.sum(Expense.amount)).first()
