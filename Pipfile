@@ -8,6 +8,7 @@ ipdb = "*"
 sqlalchemy = "*"
 faker = "*"
 datetime = "*"
+simple-term-menu = "*"
 
 [dev-packages]
 
