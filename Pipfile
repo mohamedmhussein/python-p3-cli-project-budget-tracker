@@ -9,6 +9,7 @@ sqlalchemy = "*"
 faker = "*"
 datetime = "*"
 simple-term-menu = "*"
+rich = "*"
 
 [dev-packages]
 

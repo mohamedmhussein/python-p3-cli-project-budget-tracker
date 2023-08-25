@@ -4,6 +4,8 @@ from models import engine, Session, Expense, Category
 import subprocess
 import sys
 import os
+from rich.console import Console
+from rich.table import Table
 
 def create_expense(amount,description,category_id, date):
     session = Session()
@@ -22,12 +24,21 @@ def delete_all_records(table):
     session.query(table).delete()
     session.commit()
 
-def display_data(table):
+def display_data(db):
     print("\n")
+    table = Table(title = "All Expenses")
+    columns = {"ID": "cyan", "Amount": "magenta", "Description": "bright_yellow", "Category ID": "white", "Date": "bright_green"}
+    i = 0
+    for column in columns:
+        table.add_column(list(columns.keys())[i], style = columns[column])
+        i += 1
     session = Session()
-    all_data = session.query(table).all()
-    for row in all_data:
-        print(row)
+    all_data = session.query(db).all()
+    for expense in all_data:
+        table.add_row(str(expense.id), str(expense.amount), expense.description, str(expense.category_id), expense.date)
+        # print(expense)
+    console = Console()
+    console.print(table)
 
 def sort_by_amount(mode):
     session = Session()
