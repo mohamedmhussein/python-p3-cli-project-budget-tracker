@@ -1,7 +1,9 @@
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy import desc, func
 from models import engine, Session, Expense, Category
 import subprocess
 import sys
+import os
 
 def create_expense(amount,description,category_id, date):
     session = Session()
@@ -27,9 +29,18 @@ def display_data(table):
     for row in all_data:
         print(row)
 
-def restart_script(script_file):
-    python = sys.executable  
-    script = script_file  
-    subprocess.call([python, script])
+def sort_by_amount(mode):
+    session = Session()
+    if mode == "ascending":
+        sorted_data = session.query(Expense).order_by(Expense.amount).all()
+    elif mode == "descending":
+        sorted_data = session.query(Expense).order_by(desc(Expense.amount)).all()
+    for row in sorted_data:
+        print(row)
+def sum_expenses():
+    session = Session()
+    expenses_sum = session.query(func.sum(Expense.amount)).first()
+    print(f"${round(expenses_sum[0],2)}")
+
 
 
