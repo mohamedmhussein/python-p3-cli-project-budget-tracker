@@ -1,4 +1,4 @@
-from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month
+from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month,  get_expenses_by_category_month
 from models import Expense, Category, Session
 from sqlalchemy import desc
 from sqlalchemy.orm import joinedload, relationship
@@ -25,20 +25,20 @@ if __name__ == "__main__":
 
     print("Choose one of the following options:\n \n")
 
-    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses"]
+    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category"]
     terminal_menu = TerminalMenu(options)
     user_choice = terminal_menu.show()
     print(options[user_choice])
 
     if user_choice == 0:
         session = Session()
-        all_data = session.query(Expense).options(joinedload(Expense.category)).all()
-        display_data(Expense, all_data)
+        all_expenses = session.query(Expense).options(joinedload(Expense.category)).all()
+        display_data(Expense, all_expenses)
         # restart_script()
     elif user_choice == 1:
         session = Session()
-        all_data = session.query(Category).all()
-        display_data(Category, all_data)
+        all_categories = session.query(Category).all()
+        display_data(Category, all_categories)
         # restart_script()
     elif user_choice == 2:
         date = input("Enter the expense date (YYYY-MM-DD) ")
@@ -73,5 +73,14 @@ if __name__ == "__main__":
         month = int(input("Enter the target month:\n >> "))
         year = int(input("Enter the target year:\n >> "))
         sum_expenses(month, year)
+    elif user_choice == 8:
+        print("Select the desired category: \n")
+        session = Session()
+        all_categories = session.query(Category).all()
+        options = [str(category) for category in all_categories]
+        category_id_choice = TerminalMenu(options).show() + 1
+        print(category_id_choice)
+        sorted_data = get_expenses_by_category_month(category_id_choice)
+        display_data(Expense,sorted_data)
 
 

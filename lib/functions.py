@@ -70,6 +70,13 @@ def expense_by_month(month, year):
     session = Session()
     return session.query(Expense).filter(Expense.date.like(f"{year}-{month:02d}-%")).all()
 
+def get_expenses_by_category_month(category_id, month = None, year = None):
+    session = Session()
+    data = session.query(Expense).filter(Expense.category_id == category_id)
+
+    if month and year:
+        data = data.date.like(f"{year}-{month:02d%}-%")
+    return data.all()
 
 
 
