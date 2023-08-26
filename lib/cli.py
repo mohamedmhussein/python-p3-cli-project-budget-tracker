@@ -25,13 +25,6 @@ if __name__ == "__main__":
 
     print("Choose one of the following options:\n \n")
 
-    # print("1) Show all expenses")
-    # print("2) Show categories")
-    # print("3) Add an expense")
-    # print("4) Add a new category")
-    # print("5) Sort expenses")
-    # print("6) Sum expenses")
-    # user_choice = int(input(">>  "))
     options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses"]
     terminal_menu = TerminalMenu(options)
     user_choice = terminal_menu.show()

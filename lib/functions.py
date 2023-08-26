@@ -11,9 +11,15 @@ import random
 
 def create_expense(amount,description,category_id, date):
     session = Session()
-    new_expense = Expense(amount = amount, category_id = category_id, description = description, date = date)
-    session.add(new_expense)
-    session.commit()
+    console = Console()
+    categories_count = session.query(func.count(Category.id)).first()[0]
+
+    if int(category_id) > categories_count:
+        console.print("\nCategory does not exist, please try again", style = "bold underline bright_red")
+    else:
+        new_expense = Expense(amount = amount, category_id = category_id, description = description, date = date)
+        session.add(new_expense)
+        session.commit()
 
 def create_category(name):
     session = Session()
@@ -43,7 +49,7 @@ def display_data(model_cls, all_data):
 
     for data in all_data:
         # Retrieve category name using the relationship attribute 'category'
-        category_name = data.category.name if hasattr(data, 'category') else ""
+        category_name = data.category.name
 
         row_values = [str(getattr(data, column.name)) for column in model_cls.__table__.columns]
         row_values.append(category_name)
