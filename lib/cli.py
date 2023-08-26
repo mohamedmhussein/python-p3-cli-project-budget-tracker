@@ -1,6 +1,7 @@
-from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses
+from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month
 from models import Expense, Category, Session
 from sqlalchemy import desc
+from sqlalchemy.orm import joinedload, relationship
 import subprocess
 import sys
 import os
@@ -31,14 +32,14 @@ if __name__ == "__main__":
     # print("5) Sort expenses")
     # print("6) Sum expenses")
     # user_choice = int(input(">>  "))
-    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses"]
+    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses"]
     terminal_menu = TerminalMenu(options)
     user_choice = terminal_menu.show()
     print(options[user_choice])
 
     if user_choice == 0:
-        session = Sessoin()
-        all_data = session.query(Expense).all()
+        session = Session()
+        all_data = session.query(Expense).options(joinedload(Expense.category)).all()
         display_data(Expense, all_data)
         # restart_script()
     elif user_choice == 1:
@@ -71,6 +72,13 @@ if __name__ == "__main__":
         # restart_script()
     elif user_choice == 5:
         sum_expenses()
-
+    elif user_choice ==6:
+        month = int(input("Enter the target month:\n >> "))
+        year = int(input("Enter the target year:\n >> "))
+        display_data(Expense, expense_by_month(month, year))
+    elif user_choice == 7:
+        month = int(input("Enter the target month:\n >> "))
+        year = int(input("Enter the target year:\n >> "))
+        sum_expenses(month, year)
 
 

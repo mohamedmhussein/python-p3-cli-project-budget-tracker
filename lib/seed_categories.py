@@ -20,7 +20,12 @@ common_categories = [
     "Education",
     "Travel",
     "Childcare",
-    "Miscellaneous"
+    "Miscellaneous",
+    "Groceries",
+    "Rent",
+    "Insurance",
+    "Subscriptions",
+    "Investments"
 ]
 
 for category in common_categories:
