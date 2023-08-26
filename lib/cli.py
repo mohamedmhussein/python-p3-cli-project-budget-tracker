@@ -36,7 +36,7 @@ if __name__ == "__main__":
         display_data(Expense, all_data)
         # restart_script()
     elif user_choice == 1:
-        session = Sessoin()
+        session = Session()
         all_data = session.query(Category).all()
         display_data(Category, all_data)
         # restart_script()

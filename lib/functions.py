@@ -49,7 +49,7 @@ def display_data(model_cls, all_data):
 
     for data in all_data:
         # Retrieve category name using the relationship attribute 'category'
-        category_name = data.category.name
+        category_name = data.category.name if hasattr(data, 'category') else ""
 
         row_values = [str(getattr(data, column.name)) for column in model_cls.__table__.columns]
         row_values.append(category_name)
@@ -69,6 +69,8 @@ def sum_expenses(month = None, year = None):
 def expense_by_month(month, year):
     session = Session()
     return session.query(Expense).filter(Expense.date.like(f"{year}-{month:02d}-%")).all()
+
+
 
 
 
