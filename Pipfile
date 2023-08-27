@@ -4,10 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-ipdb = "*"
 sqlalchemy = "*"
-faker = "*"
-datetime = "*"
 simple-term-menu = "*"
 rich = "*"
 
