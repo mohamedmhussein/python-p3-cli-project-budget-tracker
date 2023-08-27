@@ -45,7 +45,7 @@ def display_data(model_cls, all_data):
     print("\n")
 
     console = Console()
-    colors = ["cyan", "magenta", "bright_yellow", "white", "bright_green"]
+    colors = ["cyan", "magenta", "bright_yellow", "white", "bright_green", "bright_yellow", "bright_magenta", "green3"]
     table_title = Text(f"{model_cls.__name__}s Data")
     table_title.stylize("bold bright_yellow")
     console.print(table_title)
