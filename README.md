@@ -66,6 +66,14 @@ The Budget Tracker CLI consists of several Python files, each serving a specific
 - Delete expense and category records.
 - Seed sample data for testing purposes.
 
+## Contributing
+
+Contributions to the Budget Tracker CLI are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue in the repository.
+
+## License
+
+This project is licensed under the [MIT License](https://github.com/mohamedmhussein/python-p3-cli-project-budget-tracker/blob/main/LICENSE).
+
 ### What Goes into a README?
 
 This README should serve as a template for your own- go through the important
