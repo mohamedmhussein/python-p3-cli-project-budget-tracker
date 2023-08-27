@@ -32,6 +32,12 @@ def delete_all_records(table):
     session.query(table).delete()
     session.commit()
 
+def delete_record(model_cls, id):
+    session = Session()
+    record = session.query(model_cls).filter(model_cls.id == id).first()
+    session.delete(record)
+    session.commit()
+
 def display_data(model_cls, all_data):
     print("\n")
 
@@ -45,14 +51,18 @@ def display_data(model_cls, all_data):
         table.add_column(column.name, style=random.choice(colors), header_style="bold")
 
     # Add an additional column for 'category'
-    table.add_column("Category", style=random.choice(colors), header_style="bold")
+    if model_cls != Category:
+        table.add_column("Category", style=random.choice(colors), header_style="bold")
 
     for data in all_data:
         # Retrieve category name using the relationship attribute 'category'
-        category_name = data.category.name if hasattr(data, 'category') else ""
+        if model_cls != Category:
+            category_name = data.category.name if hasattr(data, 'category') else ""
 
         row_values = [str(getattr(data, column.name)) for column in model_cls.__table__.columns]
-        row_values.append(category_name)
+        if model_cls != Category:
+            row_values.append(category_name)
+            
         table.add_row(*row_values)
     console.print(table)
 
@@ -78,7 +88,7 @@ def get_expenses_by_category_month(category_id, month = None, year = None):
         data = data.date.like(f"{year}-{month:02d%}-%")
     return data.all()
 
-def Update_record(model_cls, id, new_data):
+def update_record(model_cls, id, new_data):
     session = Session()
     query = session.query(model_cls).filter(model_cls.id == id)
 

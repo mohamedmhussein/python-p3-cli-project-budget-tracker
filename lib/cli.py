@@ -1,4 +1,4 @@
-from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month,  get_expenses_by_category_month, Update_record
+from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month, delete_record, get_expenses_by_category_month, update_record
 from models import Expense, Category, Session
 from sqlalchemy import desc
 from sqlalchemy.orm import joinedload, relationship
@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     print("Choose one of the following options:\n \n")
 
-    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data"]
+    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row"]
     user_choice = TerminalMenu(options).show()
     print(options[user_choice])
 
@@ -103,24 +103,40 @@ if __name__ == "__main__":
                 "category_id": category_id,
                 "date": date
             }
-            Update_record(Expense, record_id, new_data)
+            update_record(Expense, record_id, new_data)
         
         elif choice == 2:
-            # session = Session()
-            # all_expenses = session.query(Category).all()
-            # display_data(Expense, all_expenses)
-            # record_id = input("Enter the Expense id you desire to update >> ")
+            session = Session()
+            all_categories = session.query(Category).all()
+            display_data(Category, all_categories)
+            record_id = input("Enter the Category id you desire to update >> ")
 
-            # date = input("\nEnter the expense date (YYYY-MM-DD) >> ")
-            # category_id = input("\nEnter the expense category id >> ")
-            # amount = input("\nEnter the expense amount >> ")
-            # description = input("\nEnter the expense description >> ")
-            # new_data = {
-            #     "amount": amount,
-            #     "description": description,
-            #     "category_id": category_id,
-            #     "date": date
-            # }
-            # Update_record(Expense, record_id, new_data)
+            category_name = input("\nEnter the updated category name >> ")
+            new_data = {
+                "name": category_name
+            }
+            update_record(Category, record_id, new_data)
 
         console.print("The record has been updated :white_heavy_check_mark: :white_heavy_check_mark:", style = "bold bright_green")
+
+    elif user_choice == 10:
+
+        console.print("Which of the following tables you want to update: \n", style = "bold bright_cyan")
+        choice = TerminalMenu(["Expenses", "Categories"]).show() + 1
+        if choice == 1:
+            #The following 3 lines display the table
+            session = Session()
+            all_expenses = session.query(Expense).options(joinedload(Expense.category)).all()
+            display_data(Expense, all_expenses)
+            record_id = input("Enter the Expense id you desire to delete >> ")
+
+            delete_record(Expense, record_id)
+        elif choice == 2:
+            session = Session()
+            all_categories = session.query(Category).all()
+            display_data(Category, all_categories)
+            record_id = input("Enter the Category id you desire to update >> ")
+
+            delete_record(Category, record_id)
+
+        console.print("The record has been deleted :white_heavy_check_mark: :white_heavy_check_mark:", style = "bold bright_green")
