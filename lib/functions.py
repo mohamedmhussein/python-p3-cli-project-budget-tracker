@@ -15,17 +15,20 @@ def create_expense(amount,description,category_id, date):
     categories_count = session.query(func.count(Category.id)).first()[0]
 
     if int(category_id) > categories_count:
-        console.print("\nCategory does not exist, please try again", style = "bold underline bright_red")
+        console.print("\nCategory does not exist :x: :x:, please try again\n", style = "bold underline bright_red")
     else:
         new_expense = Expense(amount = amount, category_id = category_id, description = description, date = date)
         session.add(new_expense)
         session.commit()
+    console.print(f"\n The new Expense has been added :white_heavy_check_mark: :white_heavy_check_mark:\n", style = "bold bright_green")
 
 def create_category(name):
+    console = Console()
     session = Session()
     new_category = Category(name = name)
     session.add(new_category)
     session.commit()
+    console.print(f"\n Category {name} has been added :white_heavy_check_mark: :white_heavy_check_mark:\n", style = "bold bright_green")
 
 def delete_all_records(table):
     session = Session()
@@ -99,11 +102,6 @@ def update_record(model_cls, id, new_data):
     }
     if new_dict:
         query.update(new_dict)
-    # for row in query:
-    #     row.amount = 50
-    #     row.description = "Car insurance"
-    #     row.category_id = 18
-    #     row.date = "2023-04-15"
     session.commit()
 
 
