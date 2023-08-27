@@ -8,18 +8,40 @@ To use the Budget Tracker CLI, follow these steps:
 
 1. Fork and clone the repository to your local computer:
 
-   ```
+   ```bash
    git clone git@github.com:mohamedmhussein/python-p3-cli-project-budget-tracker.git
    ```
 
-   You now have a basic idea of what constitutes a CLI, but you (understandably!)
-   likely don't have the best idea of where to start. Fork and clone this lesson
-   for a template for your CLI. Take a look at the directory structure before we
-   begin:
+2. Navigate to the project directory:
 
+   ```bash
+   cd <app_directory>
    ```
 
+3. Install the required dependencies using pipenv:
+
+   ```bash
+   pipenv install
    ```
+
+## Usage
+
+You now have a basic idea of what constitutes a CLI, but you (understandably!)
+likely don't have the best idea of where to start. Fork and clone this lesson
+for a template for your CLI. Take a look at the directory structure before we
+begin:
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
 
 ```console
 .
@@ -27,12 +49,12 @@ To use the Budget Tracker CLI, follow these steps:
 ├── Pipfile.lock
 ├── README.md
 └── lib
-    ├── cli.py
-    ├── db
-    │   ├── models.py
-    │   └── seed.py
-    ├── debug.py
-    └── helpers.py
+ ├── cli.py
+ ├── db
+ │   ├── models.py
+ │   └── seed.py
+ ├── debug.py
+ └── helpers.py
 ```
 
 > **Note: You may already know some or all of the material covered in this
