@@ -66,6 +66,37 @@ The Budget Tracker CLI consists of several Python files, each serving a specific
 - Delete expense and category records.
 - Seed sample data for testing purposes.
 
+## Function Descriptions
+
+Here's a detailed overview of the key functions in `functions.py` file provided in the lib directory:
+
+- **`create_expense(amount, description, category_id, date)`**
+  Allows you to create a new expense record. Provide the amount, description, category ID, and date for the expense. The function validates the category ID against existing categories and adds the expense to the database.
+
+- **`create_category(name)`**
+  Enables the creation of new expense categories. Simply provide the name of the category, and it will be added to the database.
+
+- **`delete_all_records(model_cls)`**
+Deletes all records from the specified table. Useful for cleaning up data during testing or resetting the application.
+
+- **`delete_record(model_cls, id)`**
+Deletes a specific record of the given model class (Expense or Category) by ID.
+
+- **`display_data(model_cls, all_data)`**
+Displays the data from the specified model class (Expense or Category) in a tabular format. Provides a visual representation of the stored data.
+
+- **`sum_expenses(month = None, year = None)`**
+Calculates and displays the sum of expenses. If provided with a specific month and year, it calculates the sum for that period.
+
+- **`expense_by_month(month, year)`**
+Retrieves and returns a list of expenses for a specific month and year.
+
+- **`get_expenses_by_category_month(category_id, month = None, year = None)`**
+Retrieves expenses by category and optionally filters them by month and year.
+
+- **`update_record(model_cls, id, new_data)`**
+Updates the data of a specific record in the given model class (Expense or Category) by ID. Pass a dictionary new_data containing the updated values.
+
 ## Contributing
 
 Contributions to the Budget Tracker CLI are welcome! If you find any issues or have suggestions for improvements, please feel free to submit a pull request or open an issue in the repository.

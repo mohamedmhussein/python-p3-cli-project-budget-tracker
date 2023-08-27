@@ -9,7 +9,11 @@ from simple_term_menu import TerminalMenu
 from rich.console import Console
 console = Console()
 
-def restart_script():
+
+def restart_script(): #Restarting script function
+    os.execl(sys.executable, python, *sys.argv)
+
+def restart_script(): # A func
     script_path = os.path.abspath(__file__)  # Get the absolute path of the current script
     script_directory = os.path.dirname(script_path)  # Get the directory of the script
     python = sys.executable  # Get the path to the current Python interpreter
@@ -18,51 +22,54 @@ def restart_script():
 
 if __name__ == "__main__":
     
+    
+    #Introductory text display
     console.print("\n******B U D G E T  T R A C K E R******", style ="bold underline bright_green", justify = "center")
     console.print("Welcome to the Budget Tracker CLI, where you can manage your finances and track your expenses easily.", style ="bold underline bright_green", justify = "center")
-
     console.print("\nChoose one of the following options to start:\n \n", style ="bold underline bright_yellow", )
 
-
+    #App options
     options = ["Display Table","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row", "Seed Sample data (for testing purpose)"]
+    
     user_choice = TerminalMenu(options).show()
-    print(options[user_choice])
 
     if user_choice == 0: #Display Table
         console.print("Which of the following table you want to display? \n", style = "bold bright_cyan")
         choice = TerminalMenu(["Expenses", "Categories"]).show() + 1
-        if choice == 1:
+        if choice == 1: #Display expenses table
             session = Session()
             all_expenses = session.query(Expense).options(joinedload(Expense.category)).all()
             display_data(Expense, all_expenses)
             # restart_script()
-        elif choice == 2:
+        elif choice == 2: #Display categories table
             session = Session()
             all_categories = session.query(Category).all()
             display_data(Category, all_categories)
             # restart_script()
-    elif user_choice == 1:
+    elif user_choice == 1: #Adds a new expene
         date = input("Enter the expense date (YYYY-MM-DD) ")
         category_id = input("Enter the expense category id ")
         amount = input("Enter the expense amount ")
         description = input("Enter the expense description ")
+        
         create_expense(amount, description, category_id, date)
         # restart_script()
-    elif user_choice == 2:
+    elif user_choice == 2: #Adds a new category
         name = input("Enter the category name: ")
+
         create_category(name)
         # restart_script()
-    elif user_choice == 3:
+    elif user_choice == 3: #Display sorted data
         sort_choice = int(input("1) Ascending\n2) Descending \n>>"))
+        
         session = Session()
-        if sort_choice == 1:
+        if sort_choice == 1: #Ascending sorting
             sorted_data = session.query(Expense).order_by(Expense.amount).all()
             display_data(Expense, sorted_data)
             # sort_by_amount("ascending")
-        elif sort_choice == 2:
+        elif sort_choice == 2: #Descending sorting
             sorted_data = session.query(Expense).order_by(desc(Expense.amount)).all()
             display_data(Expense, sorted_data)            
-            # sort_by_amount("descending")
         # restart_script()
     elif user_choice == 4:
         sum_expenses()
@@ -145,3 +152,12 @@ if __name__ == "__main__":
         subprocess.run(['python', 'lib/seed_expenses.py'])
         subprocess.run(['python', 'lib/seed_categories.py'])
         console.print("Seed data has been successfully added to the database :white_heavy_check_mark: :white_heavy_check_mark:\n", style = "bold underline bright_yellow")
+    
+    #Promoting the user to re-run the app or exit
+    console.print("Do you want to re-run the app or exit?\n", style="bold underline cyan")
+    options = ["Re-run the app", "Exit"]
+    final_choice = TerminalMenu(options).show() + 1
+    if final_choice == 1:
+        restart_script()
+    else:
+        console.print("Thank you for using the budget tracker CLI :green_heart::green_heart:\nTo run the app again, type 'python lib/cli.py'", style = "bold green3")

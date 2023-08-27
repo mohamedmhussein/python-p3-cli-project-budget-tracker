@@ -30,9 +30,9 @@ def create_category(name):
     session.commit()
     console.print(f"\n Category {name} has been added :white_heavy_check_mark: :white_heavy_check_mark:\n", style = "bold bright_green")
 
-def delete_all_records(table):
+def delete_all_records(model_cls):
     session = Session()
-    session.query(table).delete()
+    session.query(model_cls).delete()
     session.commit()
 
 def delete_record(model_cls, id):
