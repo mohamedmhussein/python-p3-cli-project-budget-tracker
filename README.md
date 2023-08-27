@@ -1,18 +1,25 @@
-# Phase 3 CLI Project Template
+# Budget Tracker CLI
 
-## Learning Goals
+The Budget Tracker CLI is a Python-based command-line application designed to help you manage your finances and track your expenses easily. This tool utilizes the SQLAlchemy library for database management and provides various features to handle your financial data effectively.
 
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+## Installation
 
-***
+To use the Budget Tracker CLI, follow these steps:
 
-## Introduction
+1. Fork and clone the repository to your local computer:
 
-You now have a basic idea of what constitutes a CLI, but you (understandably!)
-likely don't have the best idea of where to start. Fork and clone this lesson
-for a template for your CLI. Take a look at the directory structure before we
-begin:
+   ```
+   git clone git@github.com:mohamedmhussein/python-p3-cli-project-budget-tracker.git
+   ```
+
+   You now have a basic idea of what constitutes a CLI, but you (understandably!)
+   likely don't have the best idea of where to start. Fork and clone this lesson
+   for a template for your CLI. Take a look at the directory structure before we
+   begin:
+
+   ```
+
+   ```
 
 ```console
 .
@@ -32,7 +39,7 @@ begin:
 > lesson. We hope that having it all in one place will help you in designing
 > and developing your project, regardless of where you're starting off.**
 
-***
+---
 
 ## Where Do I Start?
 
@@ -88,7 +95,7 @@ Your project is now version-controlled locally and online. This will allow you
 to create different versions of your project and pick up your work on a
 different machine if the need arises.
 
-***
+---
 
 ## Generating Your Pipenv
 
@@ -112,7 +119,7 @@ $ git push
 
 Now that your environment is set up, run `pipenv shell` to enter it.
 
-***
+---
 
 ## Generating Your Database
 
@@ -138,7 +145,7 @@ If you want to seed your database, now would be a great time to write out your
 `seed.py` script and run it to generate some test data. You may want to use
 Pipenv to install Faker to save you some time.
 
-***
+---
 
 ## Generating Your CLI
 
@@ -190,7 +197,7 @@ if __name__ == '__main__':
 
 ```
 
-***
+---
 
 ## Updating Your README.md
 
@@ -220,7 +227,7 @@ Screenshots and links to resources that you used throughout are also useful to
 users and collaborators, but a little more syntactically complicated. Only add
 these in if you're feeling comfortable with Markdown.
 
-***
+---
 
 ## Conclusion
 
@@ -230,7 +237,7 @@ off to a good start with your Phase 3 Project.
 
 Happy coding!
 
-***
+---
 
 ## Resources
 
