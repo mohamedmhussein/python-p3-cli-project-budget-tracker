@@ -17,44 +17,42 @@ def restart_script():
     subprocess.call([python, os.path.join(script_directory, script_name)])
 
 if __name__ == "__main__":
+    
+    console.print("\n******B U D G E T  T R A C K E R******", style ="bold underline bright_green", justify = "center")
+    console.print("Welcome to the Budget Tracker CLI, where you can manage your finances and track your expenses easily.", style ="bold underline bright_green", justify = "center")
 
-    console.print("******B U D G E T  T R A C K E R******", style ="bold underline bright_green", justify = "center")
+    console.print("\nChoose one of the following options to start:\n \n", style ="bold underline bright_yellow", )
 
-    # print("******BUDGET TRACKER******")
-    # print("-----------------------------------")
-    # print("Welcome to the Budget Tracker CLI!")
-    # print("-----------------------------------")
-    # print("Manage your finances and track your expenses easily.")
-    # print("-----------------------------------")
 
-    # print("Choose one of the following options:\n \n")
-
-    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row"]
+    options = ["Display Table","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row", "Seed Sample data (for testing purpose)"]
     user_choice = TerminalMenu(options).show()
     print(options[user_choice])
 
-    if user_choice == 0:
-        session = Session()
-        all_expenses = session.query(Expense).options(joinedload(Expense.category)).all()
-        display_data(Expense, all_expenses)
-        # restart_script()
+    if user_choice == 0: #Display Table
+        console.print("Which of the following table you want to display? \n", style = "bold bright_cyan")
+        choice = TerminalMenu(["Expenses", "Categories"]).show() + 1
+        if choice == 1:
+            session = Session()
+            all_expenses = session.query(Expense).options(joinedload(Expense.category)).all()
+            display_data(Expense, all_expenses)
+            # restart_script()
+        elif choice == 2:
+            session = Session()
+            all_categories = session.query(Category).all()
+            display_data(Category, all_categories)
+            # restart_script()
     elif user_choice == 1:
-        session = Session()
-        all_categories = session.query(Category).all()
-        display_data(Category, all_categories)
-        # restart_script()
-    elif user_choice == 2:
         date = input("Enter the expense date (YYYY-MM-DD) ")
         category_id = input("Enter the expense category id ")
         amount = input("Enter the expense amount ")
         description = input("Enter the expense description ")
         create_expense(amount, description, category_id, date)
         # restart_script()
-    elif user_choice == 3:
+    elif user_choice == 2:
         name = input("Enter the category name: ")
         create_category(name)
         # restart_script()
-    elif user_choice == 4:
+    elif user_choice == 3:
         sort_choice = int(input("1) Ascending\n2) Descending \n>>"))
         session = Session()
         if sort_choice == 1:
@@ -66,17 +64,17 @@ if __name__ == "__main__":
             display_data(Expense, sorted_data)            
             # sort_by_amount("descending")
         # restart_script()
-    elif user_choice == 5:
+    elif user_choice == 4:
         sum_expenses()
-    elif user_choice ==6:
+    elif user_choice == 5:
         month = int(input("Enter the target month:\n >> "))
         year = int(input("Enter the target year:\n >> "))
         display_data(Expense, expense_by_month(month, year))
-    elif user_choice == 7:
+    elif user_choice == 6:
         month = int(input("Enter the target month:\n >> "))
         year = int(input("Enter the target year:\n >> "))
         sum_expenses(month, year)
-    elif user_choice == 8:
+    elif user_choice == 7:
         print("Select the desired category: \n")
         session = Session()
         all_categories = session.query(Category).all()
@@ -85,7 +83,7 @@ if __name__ == "__main__":
         print(category_id_choice)
         sorted_data = get_expenses_by_category_month(category_id_choice)
         display_data(Expense,sorted_data)
-    elif user_choice == 9:
+    elif user_choice == 8:
         console.print("Which of the following table you want to update: \n", style = "bold bright_cyan")
         choice = TerminalMenu(["Expenses", "Categories"]).show() + 1
         if choice == 1:
@@ -121,7 +119,7 @@ if __name__ == "__main__":
 
         console.print("The record has been updated :white_heavy_check_mark: :white_heavy_check_mark:", style = "bold bright_green")
 
-    elif user_choice == 10:
+    elif user_choice == 9:
 
         console.print("Which of the following tables you want to update: \n", style = "bold bright_cyan")
         choice = TerminalMenu(["Expenses", "Categories"]).show() + 1
@@ -142,3 +140,8 @@ if __name__ == "__main__":
             delete_record(Category, record_id)
 
         console.print("The record has been deleted :white_heavy_check_mark: :white_heavy_check_mark:", style = "bold bright_green")
+    
+    elif user_choice == 10:
+        subprocess.run(['python', 'lib/seed_expenses.py'])
+        subprocess.run(['python', 'lib/seed_categories.py'])
+        console.print("Seed data has been successfully added to the database :white_heavy_check_mark: :white_heavy_check_mark:\n", style = "bold underline bright_yellow")
