@@ -15,7 +15,6 @@ class Expense(Base):
     date = Column(String())
     category = relationship("Category", back_populates="expense")
     
-    # def __init__(self, amount, description,ca)
     def __repr__(self):
         return f"{self.id}) Amount: {self.amount}, description: {self.description}, category id: {self.category_id}, Date: {self.date}"
 
@@ -27,6 +26,5 @@ class Category(Base):
 
     def __repr__(self):
         return f"{self.name}"
-        # return f"{self.id}) {self.name}"
     
 Base.metadata.create_all(bind = engine)

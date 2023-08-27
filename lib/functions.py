@@ -103,6 +103,13 @@ def update_record(model_cls, id, new_data):
     if new_dict:
         query.update(new_dict)
     session.commit()
+def delete_all(delete_expenses, delete_categories):
+    if delete_expenses:
+            session.query(Expense).delete()
+            session.commit()
+    if delete_categories:
+            session.query(Category).delete()
+            session.commit()
 
 
 
