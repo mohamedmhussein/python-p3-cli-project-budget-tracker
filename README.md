@@ -51,6 +51,20 @@ The Budget Tracker CLI consists of several Python files, each serving a specific
 - `seed_categories.py`: Populates the Category table with sample category data for testing purposes.
 - `seed_expenses.py`: Populates the Expense table with sample expense data for testing purposes.
 - `cli.py`: The main entry point of the application that provides the command-line interface and menu options.
+- `budget_tracker.db`: The database file where all the data is saved.
+
+## Features
+
+- Add, view, and categorize expenses.
+- Create and manage expense categories.
+- Sort and display expenses in ascending or descending order.
+- Calculate the sum of expenses.
+- Filter and display expenses by month.
+- Get the sum of monthly expenses.
+- Retrieve expenses by category and month.
+- Update expense and category records.
+- Delete expense and category records.
+- Seed sample data for testing purposes.
 
 ### What Goes into a README?
 
