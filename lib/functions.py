@@ -78,6 +78,24 @@ def get_expenses_by_category_month(category_id, month = None, year = None):
         data = data.date.like(f"{year}-{month:02d%}-%")
     return data.all()
 
+def Update_record(model_cls, id, new_data):
+    session = Session()
+    query = session.query(model_cls).filter(model_cls.id == id)
+
+    new_dict = {
+        getattr(model_cls, column): value
+        for column, value in new_data.items()
+        if value != ""  # Do not update empty values
+    }
+    if new_dict:
+        query.update(new_dict)
+    # for row in query:
+    #     row.amount = 50
+    #     row.description = "Car insurance"
+    #     row.category_id = 18
+    #     row.date = "2023-04-15"
+    session.commit()
+
 
 
 

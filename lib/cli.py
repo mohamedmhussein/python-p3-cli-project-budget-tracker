@@ -1,4 +1,4 @@
-from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month,  get_expenses_by_category_month
+from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month,  get_expenses_by_category_month, Update_record
 from models import Expense, Category, Session
 from sqlalchemy import desc
 from sqlalchemy.orm import joinedload, relationship
@@ -6,6 +6,8 @@ import subprocess
 import sys
 import os
 from simple_term_menu import TerminalMenu
+from rich.console import Console
+console = Console()
 
 def restart_script():
     script_path = os.path.abspath(__file__)  # Get the absolute path of the current script
@@ -25,9 +27,8 @@ if __name__ == "__main__":
 
     print("Choose one of the following options:\n \n")
 
-    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category"]
-    terminal_menu = TerminalMenu(options)
-    user_choice = terminal_menu.show()
+    options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data"]
+    user_choice = TerminalMenu(options).show()
     print(options[user_choice])
 
     if user_choice == 0:
@@ -82,5 +83,44 @@ if __name__ == "__main__":
         print(category_id_choice)
         sorted_data = get_expenses_by_category_month(category_id_choice)
         display_data(Expense,sorted_data)
+    elif user_choice == 9:
+        console.print("Which of the following table you want to update: \n", style = "bold bright_cyan")
+        choice = TerminalMenu(["Expenses", "Categories"]).show() + 1
+        if choice == 1:
+            #The following 3 lines display the table
+            session = Session()
+            all_expenses = session.query(Expense).options(joinedload(Expense.category)).all()
+            display_data(Expense, all_expenses)
+            record_id = input("Enter the Expense id you desire to update >> ")
 
+            date = input("\nEnter the expense date (YYYY-MM-DD) >> ")
+            category_id = input("\nEnter the expense category id >> ")
+            amount = input("\nEnter the expense amount >> ")
+            description = input("\nEnter the expense description >> ")
+            new_data = {
+                "amount": amount,
+                "description": description,
+                "category_id": category_id,
+                "date": date
+            }
+            Update_record(Expense, record_id, new_data)
+        
+        elif choice == 2:
+            # session = Session()
+            # all_expenses = session.query(Category).all()
+            # display_data(Expense, all_expenses)
+            # record_id = input("Enter the Expense id you desire to update >> ")
 
+            # date = input("\nEnter the expense date (YYYY-MM-DD) >> ")
+            # category_id = input("\nEnter the expense category id >> ")
+            # amount = input("\nEnter the expense amount >> ")
+            # description = input("\nEnter the expense description >> ")
+            # new_data = {
+            #     "amount": amount,
+            #     "description": description,
+            #     "category_id": category_id,
+            #     "date": date
+            # }
+            # Update_record(Expense, record_id, new_data)
+
+        console.print("The record has been updated :white_heavy_check_mark: :white_heavy_check_mark:", style = "bold bright_green")
