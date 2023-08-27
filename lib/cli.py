@@ -1,4 +1,4 @@
-from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month, delete_record, get_expenses_by_category_month, update_record
+from functions import create_category, create_expense, display_data, delete_all_records, sum_expenses, expense_by_month, delete_record, get_expenses_by_category_month, update_record, delete_all
 from models import Expense, Category, Session
 from sqlalchemy import desc
 from sqlalchemy.orm import joinedload, relationship
@@ -30,7 +30,7 @@ if __name__ == "__main__":
     console.print("\nChoose one of the following options to start:\n \n", style ="bold underline bright_yellow", )
 
     #App options
-    options = ["Display Table","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row", "Seed Sample data (for testing purpose)"]
+    options = ["Display Table","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row", "Delete an entire table records", "Seed Sample data (for testing purpose)"]
     
     user_choice = TerminalMenu(options).show()
 
@@ -170,10 +170,22 @@ if __name__ == "__main__":
 
         console.print("The record has been deleted :white_heavy_check_mark: :white_heavy_check_mark:", style = "bold bright_green")
     
-    elif user_choice == 10: #Seed data for testing
+    elif user_choice == 10:
+        console.print("Choose the able where all records need to be deleted\n", style="bold underline cyan")
+        options = ["Expenses table", "Categories table", "Both tables"]
+        choice = TerminalMenu(options).show() + 1
+        if choice == 1:
+            delete_all(True, False)
+        elif choice == 2:
+            delete_all(False, True)
+        else:
+            delete_all()
+    
+    elif user_choice == 11: #Seed data for testing
         #Running seed files
-        subprocess.run(['python', 'lib/seed_expenses.py'])
         subprocess.run(['python', 'lib/seed_categories.py'])
+        subprocess.run(['python', 'lib/seed_expenses.py'])
+        
         
         console.print("Seed data has been successfully added to the database :white_heavy_check_mark: :white_heavy_check_mark:\n", style = "bold underline bright_yellow")
     
