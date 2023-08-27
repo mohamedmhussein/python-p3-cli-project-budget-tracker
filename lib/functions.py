@@ -51,11 +51,11 @@ def display_data(model_cls, all_data):
     console.print(table_title)
     table = Table(show_header=True, header_style="bold")
     for column in model_cls.__table__.columns:
-        table.add_column(column.name, style=random.choice(colors), header_style="bold")
+        table.add_column(column.name, style=f"{random.choice(colors)} bold", header_style="bold")
 
     # Add an additional column for 'category'
     if model_cls != Category:
-        table.add_column("Category", style=random.choice(colors), header_style="bold")
+        table.add_column("Category", style=f"{random.choice(colors)} bold", header_style="bold")
 
     for data in all_data:
         # Retrieve category name using the relationship attribute 'category'

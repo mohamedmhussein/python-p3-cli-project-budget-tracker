@@ -18,14 +18,16 @@ def restart_script():
 
 if __name__ == "__main__":
 
-    print("******BUDGET TRACKER******")
-    print("-----------------------------------")
-    print("Welcome to the Budget Tracker CLI!")
-    print("-----------------------------------")
-    print("Manage your finances and track your expenses easily.")
-    print("-----------------------------------")
+    console.print("******B U D G E T  T R A C K E R******", style ="bold underline bright_green", justify = "center")
 
-    print("Choose one of the following options:\n \n")
+    # print("******BUDGET TRACKER******")
+    # print("-----------------------------------")
+    # print("Welcome to the Budget Tracker CLI!")
+    # print("-----------------------------------")
+    # print("Manage your finances and track your expenses easily.")
+    # print("-----------------------------------")
+
+    # print("Choose one of the following options:\n \n")
 
     options = ["Show all expenses","Show categories","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row"]
     user_choice = TerminalMenu(options).show()
