@@ -8,7 +8,7 @@ To use the Budget Tracker CLI, follow these steps:
 
 1. Fork and clone the repository to your local computer:
 
-   ```bash
+   ```console
    git clone git@github.com:mohamedmhussein/python-p3-cli-project-budget-tracker.git
    ```
 
@@ -41,6 +41,16 @@ To run the app, you need to write the following commands:
    ```
 
 The CLI will display a menu with various options for managing your financial data. You can select options to add expenses, create categories, sort expenses, calculate sums, and more. The menu-driven interface makes it easy to interact with the application and perform different financial tasks.
+
+## Files and Modules
+
+The Budget Tracker CLI consists of several Python files, each serving a specific purpose:
+
+- `models.py`: Contains SQLAlchemy classes for the Expense and Category tables and initializes them when run.
+- `functions.py`: Defines functions used throughout the application for database operations and data processing.
+- `seed_categories.py`: Populates the Category table with sample category data for testing purposes.
+- `seed_expenses.py`: Populates the Expense table with sample expense data for testing purposes.
+- `cli.py`: The main entry point of the application that provides the command-line interface and menu options.
 
 ### What Goes into a README?
 
