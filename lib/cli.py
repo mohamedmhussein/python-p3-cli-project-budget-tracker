@@ -14,12 +14,6 @@ def restart_script(): #Restarting script function
     os.execl(sys.executable, python, sys.argv)
     #source: https://gist.github.com/plieningerweb/39e47584337a516f56da105365a2e4c6
 
-def restart_script(): # A func
-    script_path = os.path.abspath(__file__)  # Get the absolute path of the current script
-    script_directory = os.path.dirname(script_path)  # Get the directory of the script
-    python = sys.executable  # Get the path to the current Python interpreter
-    script_name = os.path.basename(__file__)  # Get the name of the script
-    subprocess.call([python, os.path.join(script_directory, script_name)])
 
 if __name__ == "__main__":
     
