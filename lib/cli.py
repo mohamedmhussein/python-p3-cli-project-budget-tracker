@@ -30,7 +30,7 @@ if __name__ == "__main__":
     console.print("\nChoose one of the following options to start:\n \n", style ="bold underline bright_yellow", )
 
     #App options
-    options = ["Display Table","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row", "Delete an entire table records", "Seed Sample data (for testing purpose)"]
+    options = ["Display Table","Add an expense","Add a new category","Sort expenses", "Sum expenses", "Monthly Expenses", "Sum of monthly expenses", "Get expenses by Category", "Update data", "Delete data row", "Delete entire table records", "Seed Sample data (for testing purpose)"]
     
     user_choice = TerminalMenu(options).show()
 

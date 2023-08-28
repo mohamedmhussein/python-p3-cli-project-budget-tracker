@@ -104,6 +104,8 @@ Here's a detailed overview of the key functions in `functions.py` file provided 
 
 - **`update_record(model_cls, id, new_data)`**
   Updates the data of a specific record in the given model class (Expense or Category) by ID. Pass a dictionary new_data containing the updated values.
+- **`delete_all(delete_expenses=True, delete_categories=True)`**
+  Deletes all records from the database. This function allows you to remove all expense and category records or choose to delete only one type of records. The user can choose to either delete all the tabels records or one of the tables records.
 
 ## Contributing
 
@@ -112,5 +114,3 @@ Contributions to the Budget Tracker CLI are welcome! If you find any issues or h
 ## License
 
 This project is licensed under the [MIT License](https://github.com/mohamedmhussein/python-p3-cli-project-budget-tracker/blob/main/LICENSE).
-
-
